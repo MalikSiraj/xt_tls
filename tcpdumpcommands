@@ -4,3 +4,10 @@ tcpdump -ni eth0 "tcp port 443 and (tcp[((tcp[12] & 0xf0) >> 2)] = 0x16)"
 to show the packet contents
 
 tcpdump -nnvXSs 0 -ni eth0 "tcp port 443 and (tcp[((tcp[12] & 0xf0) >> 2)] = 0x16)"
+
+#tcpdump filter to match DHCP packets including a specific Client MAC Address:
+
+tcpdump -i br0 -vvv -s 1500 '((port 67 or port 68) and (udp[38:4] = 0x3e0ccf08))'
+#tcpdump filter to capture packets sent by the client (DISCOVER, REQUEST, INFORM):
+
+tcpdump -i br0 -vvv -s 1500 '((port 67 or port 68) and (udp[8:1] = 0x1))'
