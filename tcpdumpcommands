@@ -1,1 +1,6 @@
 
+tcpdump -ni eth0 "tcp port 443 and (tcp[((tcp[12] & 0xf0) >> 2)] = 0x16)"
+
+to show the packet contents
+
+tcpdump -nnvXSs 0 -ni eth0 "tcp port 443 and (tcp[((tcp[12] & 0xf0) >> 2)] = 0x16)"
